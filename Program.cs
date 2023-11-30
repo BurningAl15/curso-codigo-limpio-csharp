@@ -3,6 +3,14 @@ using System.Collections.Generic;
 
 namespace ToDo
 {
+    public enum Menu{
+        Initialize,
+        Add,
+        Remove,
+        List,
+        Quit
+    }
+
     internal class Program
     {
         public static List<string> ToDoList { get; set; }
@@ -10,29 +18,30 @@ namespace ToDo
         static void Main(string[] args)
         {
             ToDoList = new List<string>();
-            int menuSelected = 0;
+            // int menuSelected = 0;
+            Menu menuSelected = Menu.Initialize;
             do
             {
                 menuSelected = ShowMainMenu();
-                if (menuSelected == 1)
+                if (menuSelected == Menu.Add)
                 {
                     ShowMenuAdd();
                 }
-                else if (menuSelected == 2)
+                else if (menuSelected == Menu.Remove)
                 {
                     ShowMenuRemove();
                 }
-                else if (menuSelected == 3)
+                else if (menuSelected == Menu.List)
                 {
                     ShowMenuTaskList();
                 }
-            } while (menuSelected != 4);
+            } while (menuSelected != Menu.Quit);
         }
         /// <summary>
         /// Show the main menu 
         /// </summary>
         /// <returns>Returns option indicated by user</returns>
-        public static int ShowMainMenu()
+        public static Menu ShowMainMenu()
         {
             Console.WriteLine("----------------------------------------");
             Console.WriteLine("Ingrese la opción a realizar: ");
@@ -43,7 +52,7 @@ namespace ToDo
 
             // Read line
             string line = Console.ReadLine();
-            return Convert.ToInt32(line);
+            return (Menu)Convert.ToInt32(line);
         }
 
         public static void ShowMenuRemove()
