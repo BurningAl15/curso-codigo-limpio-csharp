@@ -14,28 +14,20 @@ namespace ToDo
 
     internal class Program
     {
-        public static List<string> ToDoList { get; set; }
+        public static List<string>? ToDoList { get; set; } = new List<string>();
 
         static void Main(string[] args)
         {
-            ToDoList = new List<string>();
-            // int menuSelected = 0;
             Menu menuSelected = Menu.Initialize;
             do
             {
                 menuSelected = ShowMainMenu();
                 if (menuSelected == Menu.Add)
-                {
                     ShowMenuAdd();
-                }
                 else if (menuSelected == Menu.Remove)
-                {
                     ShowMenuRemove();
-                }
                 else if (menuSelected == Menu.List)
-                {
                     ShowMenuTaskList();
-                }
             } while (menuSelected != Menu.Quit);
         }
         /// <summary>
@@ -74,14 +66,12 @@ namespace ToDo
                     {
                         string task = ToDoList[indexToRemove];
                         ToDoList.RemoveAt(indexToRemove);
-                        Console.WriteLine("Tarea " + task + " eliminada");
+                        Console.WriteLine($"Tarea {task} eliminada");
                     }
                 }
             }
-            catch (Exception ex)
-            {
+            catch (Exception)
                 Console.WriteLine("Ha ocurrido un error al eliminar la tarea");
-            }
         }
 
         public static void ShowMenuAdd()
@@ -95,22 +85,16 @@ namespace ToDo
 
                 ShowTodoList();
             }
-            catch (Exception ex)
-            {
+            catch (Exception)
                 Console.WriteLine("Ha ocurrido un error al añadir la tarea");
-            }
         }
 
         public static void ShowMenuTaskList()
         {
-            if (ToDoList == null || ToDoList.Count == 0)
-            {
-                Console.WriteLine("No hay tareas por realizar");
-            }
-            else
-            {
+            if (ToDoList?.Count > 0)
                 ShowTodoList();
-            }
+            else
+                Console.WriteLine("No hay tareas por realizar");
         }
 
         private static void ShowTodoList()
@@ -121,7 +105,7 @@ namespace ToDo
             //     Console.WriteLine((i + 1) + ". " + ToDoList[i]);
             // }
             int indexTask = 1;
-            ToDoList.ForEach((p) => Console.WriteLine((indexTask++) + ". " + p));
+            ToDoList.ForEach((task) => Console.WriteLine($"{indexTask++}. {task}"));
             Console.WriteLine("----------------------------------------");
         }
     }
