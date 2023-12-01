@@ -3,7 +3,8 @@ using System.Collections.Generic;
 
 namespace ToDo
 {
-    public enum Menu{
+    public enum Menu
+    {
         Initialize,
         Add,
         Remove,
@@ -59,13 +60,7 @@ namespace ToDo
         {
             try
             {
-                Console.WriteLine("Ingrese el número de la tarea a remover: ");
-                // Show current taks
-                for (int i = 0; i < ToDoList.Count; i++)
-                {
-                    Console.WriteLine((i + 1) + ". " + ToDoList[i]);
-                }
-                Console.WriteLine("----------------------------------------");
+                ShowTodoList();
 
                 string line = Console.ReadLine();
                 // Remove one position
@@ -93,6 +88,8 @@ namespace ToDo
                 string task = Console.ReadLine();
                 ToDoList.Add(task);
                 Console.WriteLine("Tarea registrada");
+
+                ShowTodoList();
             }
             catch (Exception)
             {
@@ -104,16 +101,21 @@ namespace ToDo
             if (ToDoList == null || ToDoList.Count == 0)
             {
                 Console.WriteLine("No hay tareas por realizar");
-            } 
+            }
             else
             {
-                Console.WriteLine("----------------------------------------");
-                for (int i = 0; i < ToDoList.Count; i++)
-                {
-                    Console.WriteLine((i + 1) + ". " + ToDoList[i]);
-                }
-                Console.WriteLine("----------------------------------------");
+                ShowTodoList();
             }
+        }
+
+        private static void ShowTodoList()
+        {
+            Console.WriteLine("----------------------------------------");
+            for (int i = 0; i < ToDoList.Count; i++)
+            {
+                Console.WriteLine((i + 1) + ". " + ToDoList[i]);
+            }
+            Console.WriteLine("----------------------------------------");
         }
     }
 }
