@@ -12,6 +12,12 @@ do
         ShowMenuRemove();
     else if (menuSelected == Menu.List)
         ShowMenuTaskList();
+    // var state = menuSelected switch
+    // {
+    //     (Menu.Add) => ShowMenuAdd(),
+    //     (Menu.Remove) => ShowMenuRemove(),
+    //     (Menu.List) => ShowMenuTaskList(),
+    // };
 } while (menuSelected != Menu.Quit);
 
 /// <summary>
