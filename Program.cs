@@ -65,15 +65,22 @@ namespace ToDo
                 string taskNumberToDelete = Console.ReadLine();
                 // Remove one position
                 int indexToRemove = Convert.ToInt32(taskNumberToDelete) - 1;
-                if (indexToRemove > -1 && ToDoList.Count > 0)
+
+                if (indexToRemove > ToDoList.Count - 1 || indexToRemove < 0)
+                    Console.WriteLine("Numero de tarea seleccionado no es valido");
+                else
                 {
-                    string task = ToDoList[indexToRemove];
-                    ToDoList.RemoveAt(indexToRemove);
-                    Console.WriteLine("Tarea " + task + " eliminada");
+                    if (indexToRemove > -1 && ToDoList.Count > 0)
+                    {
+                        string task = ToDoList[indexToRemove];
+                        ToDoList.RemoveAt(indexToRemove);
+                        Console.WriteLine("Tarea " + task + " eliminada");
+                    }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Console.WriteLine("Ha ocurrido un error al eliminar la tarea");
             }
         }
 
@@ -88,8 +95,9 @@ namespace ToDo
 
                 ShowTodoList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Console.WriteLine("Ha ocurrido un error al añadir la tarea");
             }
         }
 
@@ -113,7 +121,7 @@ namespace ToDo
             //     Console.WriteLine((i + 1) + ". " + ToDoList[i]);
             // }
             int indexTask = 1;
-            ToDoList.ForEach((p)=>Console.WriteLine((indexTask++) + ". " + p));
+            ToDoList.ForEach((p) => Console.WriteLine((indexTask++) + ". " + p));
             Console.WriteLine("----------------------------------------");
         }
     }
