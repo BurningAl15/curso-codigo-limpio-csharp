@@ -62,17 +62,14 @@ namespace ToDo
             {
                 ShowTodoList();
 
-                string line = Console.ReadLine();
+                string taskNumberToDelete = Console.ReadLine();
                 // Remove one position
-                int indexToRemove = Convert.ToInt32(line) - 1;
-                if (indexToRemove > -1)
+                int indexToRemove = Convert.ToInt32(taskNumberToDelete) - 1;
+                if (indexToRemove > -1 && ToDoList.Count > 0)
                 {
-                    if (ToDoList.Count > 0)
-                    {
-                        string task = ToDoList[indexToRemove];
-                        ToDoList.RemoveAt(indexToRemove);
-                        Console.WriteLine("Tarea " + task + " eliminada");
-                    }
+                    string task = ToDoList[indexToRemove];
+                    ToDoList.RemoveAt(indexToRemove);
+                    Console.WriteLine("Tarea " + task + " eliminada");
                 }
             }
             catch (Exception)
@@ -111,10 +108,12 @@ namespace ToDo
         private static void ShowTodoList()
         {
             Console.WriteLine("----------------------------------------");
-            for (int i = 0; i < ToDoList.Count; i++)
-            {
-                Console.WriteLine((i + 1) + ". " + ToDoList[i]);
-            }
+            // for (int i = 0; i < ToDoList.Count; i++)
+            // {
+            //     Console.WriteLine((i + 1) + ". " + ToDoList[i]);
+            // }
+            int indexTask = 1;
+            ToDoList.ForEach((p)=>Console.WriteLine((indexTask++) + ". " + p));
             Console.WriteLine("----------------------------------------");
         }
     }
